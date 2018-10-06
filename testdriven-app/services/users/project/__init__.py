@@ -9,8 +9,8 @@ app_settings = os.getenv('APP_SETTINGS')
 app.config.from_object(app_settings)
 
 # testing enviroment variable
-import sys
-print(app.config, file=sys.stderr)
+# import sys
+# print(app.config, file=sys.stderr)
 
 @app.route('/users/ping', methods=['GET'])
 def ping_pong():
