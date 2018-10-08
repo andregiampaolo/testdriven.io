@@ -50,16 +50,19 @@ def get_single_user(user_id):
     }
     try:
         user = User.query.filter_by(id=int(user_id)).first()
-        response_object = {
-            'status' : 'success',
-            'data' : {
-                'id' : user.id,
-                'username' : user.username,
-                'email' : user.email,
-                'active' : user.active
+        if not user:
+            return jsonify(response_object), 404
+        else:
+            response_object = {
+                'status' : 'success',
+                'data' : {
+                    'id' : user.id,
+                    'username' : user.username,
+                    'email' : user.email,
+                    'active' : user.active
+                }
             }
-        }
-        return jsonify(response_object), 200
+            return jsonify(response_object), 200
     except ValueError:
         return jsonify(response_object), 404
 
