@@ -14,6 +14,7 @@ class App extends Component {
         email: '',
     };
     this.addUser = this.addUser.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   };
 
   componentDidMount() {
@@ -29,6 +30,13 @@ class App extends Component {
   addUser(event) {
     event.preventDefault();
     console.log('sanity check!');
+    console.log(this.state);
+  };
+
+  handleChange(event) {
+    const obj = {};
+    obj[event.target.name] = event.target.value;
+    this.setState(obj);
   };
 
   render() {
@@ -43,7 +51,8 @@ class App extends Component {
               <AddUser
                 username={this.state.username}
                 email={this.state.email}
-                addUser={this.addUser}/>
+                addUser={this.addUser}
+                handleChange={this.handleChange}/>
               <br/><br/>
               <UsersList users={this.state.users}/>
             </div>
