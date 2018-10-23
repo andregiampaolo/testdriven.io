@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
         users: []
     };
+    this.addUser = this.addUser.bind(this);
   };
 
   componentDidMount() {
