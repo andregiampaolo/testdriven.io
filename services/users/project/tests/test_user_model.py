@@ -7,6 +7,7 @@ from project.api.models import User
 from project.tests.base import BaseTestCase
 from project.tests.utils import add_user
 
+
 class TestUserModel(BaseTestCase):
 
     def test_add_user(self):
@@ -24,7 +25,7 @@ class TestUserModel(BaseTestCase):
         )
         db.session.add(duplicate_user)
         self.assertRaises(IntegrityError, db.session.commit)
-    
+
     def test_add_user_duplicate_email(self):
         add_user('justatest', 'test@test.com')
         duplicated_user = User(
@@ -33,7 +34,7 @@ class TestUserModel(BaseTestCase):
         )
         db.session.add(duplicated_user)
         self.assertRaises(IntegrityError, db.session.commit)
-    
+
     def test_to_json(self):
         user = add_user('justatest', 'test@test.com')
         self.assertTrue(isinstance(user.to_json(), dict))
