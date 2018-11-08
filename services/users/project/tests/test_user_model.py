@@ -35,10 +35,7 @@ class TestUserModel(BaseTestCase):
         self.assertRaises(IntegrityError, db.session.commit)
     
     def test_to_json(self):
-        add_user('justatest', 'test@test.com')
-        db.session.add(user)
-        db.session.commit()
-
+        user = add_user('justatest', 'test@test.com')
         self.assertTrue(isinstance(user.to_json(), dict))
 
     if __name__ == '__main__':
