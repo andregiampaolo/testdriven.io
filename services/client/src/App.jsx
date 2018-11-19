@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import UsersList from './components/UsersList';
 import AddUser from './components/AddUser';
+import About from './components/About';
 
 
 class App extends Component{
@@ -64,6 +65,8 @@ class App extends Component{
                             />
                             <br/><br/>
                             <UsersList users={this.state.users}/>
+                            <br/>
+                            <About/>
                         </div>
                     </div>
                 </div>
