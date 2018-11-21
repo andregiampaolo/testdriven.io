@@ -6,7 +6,7 @@ import About from '../About';
 
 test('About renders properly', () => {
     const wrapper = shallow(<About/>);
-    const element = wrapper.find('<p>');
+    const element = wrapper.find('p');
     expect(element.length).toBe(1);
     expect(element.text()).toBe('Add something relevant here.');
 });
