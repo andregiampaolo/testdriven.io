@@ -20,7 +20,8 @@ class App extends Component{
                 username: '',
                 email: '',
                 password: ''
-            }
+            },
+            isAuthenticated: false,
         };
         this.addUser = this.addUser.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -72,6 +73,10 @@ class App extends Component{
         axios.post(url, data)
         .then((res) => {
             console.log(res.data);
+            this.clearFormState();
+            window.localStorage.setItem('authToken', res.data.auth_token);
+            this.setState({isAuthenticated: true, });
+            this.getUsers();
         })
         .catch((err) => { console.log(err); });
     };
@@ -82,6 +87,14 @@ class App extends Component{
         this.setState(obj);
     };
     
+    clearFormState() {
+        this.setState({
+        formData: { username: '', email: '', password: '' },
+        username: '',
+        email: ''
+        });
+    };
+
     render() {
         return (
             <div>
@@ -99,6 +112,7 @@ class App extends Component{
                                             formData={this.state.formData}
                                             handleUserFormSubmit={this.handleUserFormSubmit}
                                             handleFormChange={this.handleFormChange}
+                                            isAuthenticated={this.state.isAuthenticated}
                                         />
                                     )} />
                                     <Route exact path='/login' render={() => (
@@ -107,6 +121,7 @@ class App extends Component{
                                             formData={this.state.formData}
                                             handleUserFormSubmit={this.handleUserFormSubmit}
                                             handleFormChange={this.handleFormChange}
+                                            isAuthenticated={this.state.isAuthenticated}
                                         />
                                     )} />
                                     <Route exact path='/' render={() => (
