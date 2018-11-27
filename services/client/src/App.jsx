@@ -107,7 +107,10 @@ class App extends Component{
     render() {
         return (
             <div>
-                <NavBar title={this.state.title} />
+                <NavBar 
+                    title={this.state.title} 
+                    isAuthenticated={this.state.isAuthenticated} 
+                />
             
                 <section className="section">
                     <div className="container">
@@ -148,7 +151,11 @@ class App extends Component{
                                         </div>
                                     )}/>
                                     <Route exact path='/about' component={About} />
-                                    <Route exact path='/status' component={UserStatus}/>
+                                    <Route exact path='/status' render={() => (
+                                        <UserStatus
+                                            isAuthenticated={this.state.isAuthenticated} 
+                                        />
+                                    )} />
                                     <Route exact path='/logout' render={() => (
                                         <Logout
                                             logoutUser={this.logoutUser}
