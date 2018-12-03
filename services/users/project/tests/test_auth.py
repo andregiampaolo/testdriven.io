@@ -271,7 +271,7 @@ class TestAuthBlueprint(BaseTestCase):
             self.assertTrue(data['status'] == 'fail')
             self.assertTrue(data['message'] == 'Provide a valid auth token.')
             self.assertEqual(response.status_code, 401)
-    
+
     def test_invalid_status_inactive(self):
         add_user('test', 'test@test.com', 'test')
         # update user
