@@ -5,6 +5,7 @@ from project import db
 
 from sqlalchemy import exc
 
+from project.api.utils import authenticate
 
 users_blueprint = Blueprint('users', __name__, template_folder='./templates')
 
@@ -31,7 +32,8 @@ def ping_pong():
 
 
 @users_blueprint.route('/users', methods=['POST'])
-def add_user():
+@authenticate
+def add_user(resp):
     post_data = request.get_json()
     response_object = {
         'status': 'fail',
