@@ -8,7 +8,6 @@ from project.api.models import User
 from project.tests.utils import add_user
 
 
-
 class TestUserService(BaseTestCase):
     """Tests for the Users Service."""
 
@@ -266,7 +265,7 @@ class TestUserService(BaseTestCase):
                     'email': 'test@test.com',
                     'password': 'test'
                 }),
-            content_type='application/json'
+                content_type='application/json'
             )
             token = json.loads(resp_login.data.decode())['auth_token']
             response = self.client.post(
