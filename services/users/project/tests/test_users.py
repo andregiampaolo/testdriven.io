@@ -5,7 +5,7 @@ from project.tests.base import BaseTestCase
 from project import db
 from project.api.models import User
 
-from project.tests.utils import add_user
+from project.tests.utils import add_user, add_admin
 
 
 class TestUserService(BaseTestCase):
@@ -22,10 +22,7 @@ class TestUserService(BaseTestCase):
     def test_add_user(self):
         """Ensure a new user can be added to the database."""
         with self.client:
-            add_user('test', 'test@test.com', 'test')
-            user = User.query.filter_by(email='test@test.com').first()
-            user.admin = True
-            db.session.commit()
+            add_admin('test', 'test@test.com', 'test')
             resp_login = self.client.post(
                 '/auth/login',
                 data=json.dumps({
@@ -53,10 +50,7 @@ class TestUserService(BaseTestCase):
     def test_invalid_json(self):
         """Ensure error is thrown if the JSON object is empty."""
         with self.client:
-            add_user('test', 'test@test.com', 'test')
-            user = User.query.filter_by(email='test@test.com').first()
-            user.admin = True
-            db.session.commit()
+            add_admin('test', 'test@test.com', 'test')
             resp_login = self.client.post(
                 '/auth/login',
                 data=json.dumps({
@@ -82,10 +76,7 @@ class TestUserService(BaseTestCase):
         Ensure error is thrown if the JSON object does not have a username key.
         """
         with self.client:
-            add_user('test', 'test@test.com', 'test')
-            user = User.query.filter_by(email='test@test.com').first()
-            user.admin = True
-            db.session.commit()
+            add_admin('test', 'test@test.com', 'test')
             resp_login = self.client.post(
                 '/auth/login',
                 data=json.dumps({
@@ -112,10 +103,7 @@ class TestUserService(BaseTestCase):
     def test_add_user_duplicate_email(self):
         """Ensure error is thrown if the email already exists."""
         with self.client:
-            add_user('test', 'test@test.com', 'test')
-            user = User.query.filter_by(email='test@test.com').first()
-            user.admin = True
-            db.session.commit()
+            add_admin('test', 'test@test.com', 'test')
             resp_login = self.client.post(
                 '/auth/login',
                 data=json.dumps({
@@ -240,10 +228,7 @@ class TestUserService(BaseTestCase):
         """ Ensure error is thrown if the JSON object
         does not have a password key."""
         with self.client:
-            add_user('test', 'test@test.com', 'test')
-            user = User.query.filter_by(email='test@test.com').first()
-            user.admin = True
-            db.session.commit()
+            add_admin('test', 'test@test.com', 'test')
             resp_login = self.client.post(
                 '/auth/login',
                 data=json.dumps({
