@@ -61,9 +61,10 @@ class User(db.Model):
         except jwt.InvalidTokenError:
             return 'Invalid token. Please log in again.'
 
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, admin=False):
         self.username = username
         self.email = email
         self.password = bcrypt.generate_password_hash(
             password, current_app.config.get('BCRYPT_LOG_ROUNDS')
         ).decode()
+        self.admin = admin
